@@ -11,8 +11,6 @@ public struct AsyncAPIChannel: Hashable, Sendable {
     let addressParameterNames = try Self.parseParameterNames(in: address)
     guard !name.isEmpty,
       address.first == "/",
-      !address.contains("?"),
-      !address.contains("#"),
       Set(parameterNames).count == parameterNames.count,
       parameterNames == addressParameterNames
     else {
@@ -45,10 +43,6 @@ public struct AsyncAPIChannel: Hashable, Sendable {
           throw AsyncAPIRuntimeError.invalidChannel
         }
         names.append(String(name))
-      } else if segment.contains("{") || segment.contains("}")
-        || segment.contains("*") || segment.first == ":"
-      {
-        throw AsyncAPIRuntimeError.invalidChannel
       } else {
         guard segment != ".", segment != "..",
           segment.utf8.allSatisfy(Self.isUnreservedPathByte)
