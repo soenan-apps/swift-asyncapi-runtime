@@ -157,7 +157,7 @@ application as appropriate.
 
 ## Testing
 
-Run the formatting and test gates with the Swift 6.2 toolchain:
+Run the formatting and test gates with the Swift 6.4 toolchain:
 
 ```sh
 swift format lint --strict --recursive Sources Tests Package.swift
